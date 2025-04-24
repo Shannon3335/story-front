@@ -1,11 +1,13 @@
 <template>
-	<NuxtPage class="flex flex-row w-full min-h-screen">
-		<UInput v-model="mainCharacter" />
-		<UInput v-model="villain" />
-		<UInput v-model="setting" />
-		<UButton size="xl" @click="generateStory" />
-		<UTextarea>{{ story }}</UTextarea>
-	</NuxtPage>
+	<div
+		class="flex flex-col items-center justify-center gap-4 w-full min-h-screen"
+	>
+		<UInput v-model="mainCharacter" placeholder="Enter your hero" />
+		<UInput v-model="villain" placeholder="Enter the villain" />
+		<UInput v-model="setting" placeholder="Enter the setting" />
+		<UButton size="xl" @click="generateStory">Generate Story</UButton>
+		<UTextarea v-model="story" :rows="10" readonly />
+	</div>
 </template>
 
 <script setup lang="ts">

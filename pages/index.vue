@@ -29,7 +29,8 @@ const generateStory = async () => {
 		})
 
 		const data = await response.json()
-		story.value = data.story || "No story returned."
+		console.log(JSON.stringify(data))
+		story.value = data.Message || "No story returned."
 		if (!response.ok) {
 			throw new Error(data.error)
 		}

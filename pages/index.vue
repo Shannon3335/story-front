@@ -1,13 +1,11 @@
 <template>
-	<div
-		class="flex flex-col items-center justify-center gap-4 w-full min-h-screen"
-	>
+	<MainContainer>
 		<UInput v-model="mainCharacter" placeholder="Enter your hero" />
 		<UInput v-model="villain" placeholder="Enter the villain" />
 		<UInput v-model="setting" placeholder="Enter the setting" />
 		<UButton size="xl" @click="generateStory">Generate Story</UButton>
 		<UTextarea v-model="story" :rows="10" readonly />
-	</div>
+	</MainContainer>
 </template>
 
 <script setup lang="ts">

@@ -30,11 +30,40 @@ const state = reactive<Partial<Schema>>({
 
 const toast = useToast()
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-	toast.add({
-		title: "Success",
-		description: "Form has been submitted.",
-		color: "success",
-	})
+	// request to go api here
+	const success = await loginUser(event.data)
+	// based on success, change toast type
+
+	toast.add(
+		success
+			? {
+					title: "Success",
+					description: "Login success",
+					color: "success",
+			  }
+			: {
+					title: "Failed",
+					description: "Login attept failed",
+					color: "error",
+			  },
+	)
 	console.log(event.data)
+}
+
+const loginUser = async (userDetails: Schema) => {
+	const res = await fetch("http://localhost:8000/login", {
+		method: "POST",
+		headers: { "Content-type": "application/json" },
+		body: JSON.stringify({
+			username: userDetails.email,
+			password: userDetails.password,
+		}),
+	})
+	const data = await res.json()
+	console.log(JSON.stringify(data.Message))
+	if (!res.ok) {
+		return false
+	}
+	return true
 }
 </script>
